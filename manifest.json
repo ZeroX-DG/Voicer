@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Voicer",
+  "version": "1.0",
+
+  "description": "A chrome's voice controller",
+
+  "permissions": ["tabs"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": ["*://*/*"],
+      "js": ["libs/jquery.js", "libs/annyang.min.js"],
+      "css": ["css/voicer.css"]
+    },
+    {
+      "run_at": "document_end",
+      "matches": ["*://*/*"],
+      "js": [
+        "main.js",
+        "modules/scroll.js",
+        "modules/zoom.js",
+        "modules/tabs.js",
+        "website-actions/google/main.js",
+        "voicer.js"
+      ]
+    }
+  ]
+}

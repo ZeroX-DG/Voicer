@@ -1,0 +1,9 @@
+.recog-result {
+  padding: 10px 20px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: blue;
+  color: white;
+  display: none;
+}
