@@ -32,5 +32,11 @@
     go: webActions["google"]("go")
   });
 
+  // Youtube
+  window.__voicer.addCommand({
+    "next video": webActions["youtube"]("next_video"),
+    go: webActions["youtube"]("go")
+  });
+
   window.__voicer.start();
 })();

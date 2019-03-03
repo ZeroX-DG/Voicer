@@ -26,6 +26,7 @@
         "modules/zoom.js",
         "modules/tabs.js",
         "website-actions/google/main.js",
+        "website-actions/youtube/main.js",
         "voicer.js"
       ]
     }
