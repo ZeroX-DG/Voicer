@@ -2,7 +2,7 @@
   window.__voicer.addWebActions("youtube", function(action) {
     const $ = window.jQuery;
     const videoSelector = function () {
-      if (location.pathname === "/") {
+      if (window.location.pathname === "/") {
         return "ytd-grid-video-renderer";
       }
       return "ytd-compact-video-renderer, ytd-compact-radio-renderer";
@@ -35,6 +35,9 @@
         let currentVideo = $(videoSelector())[window.__youtube_index];
         removeBorder(currentVideo);
         window.__youtube_index--;
+        if (window.__youtube_index < 0) {
+          window.__youtube_index = 0;
+        }
         currentVideo = $(videoSelector())[window.__youtube_index];
         addBorder(currentVideo);
       };
@@ -42,13 +45,14 @@
 
     const handleGotoVideo = function () {
       return function() {
-        if (!window.__youtube_index || window.__youtube_index === -1) {
+        if (window.__youtube_index === undefined || window.__youtube_index === -1) {
           return;
         }
         const currentVideo = $(videoSelector())[window.__youtube_index];
         removeBorder(currentVideo);
         window.__youtube_index = -1;
-        currentVideo.querySelector("a").click();
+        const link = currentVideo.querySelector("a");
+        link.click();
       };
     }
 
@@ -67,7 +71,7 @@
 
   window.__voicer.addCommand({
     "next video": webActions["youtube"]("next_video"),
-    "previous video": webActions["youtube"]("prev_video")
+    "previous video": webActions["youtube"]("prev_video"),
     go: webActions["youtube"]("go")
   });
 })();
