@@ -27,6 +27,19 @@
       };
     }
 
+    const handlePrevVideo = function () {
+      if (!window.__youtube_index) {
+        window.__youtube_index = -1;
+      }
+      return function() {
+        let currentVideo = $(videoSelector())[window.__youtube_index];
+        removeBorder(currentVideo);
+        window.__youtube_index--;
+        currentVideo = $(videoSelector())[window.__youtube_index];
+        addBorder(currentVideo);
+      };
+    }
+
     const handleGotoVideo = function () {
       return function() {
         if (!window.__youtube_index || window.__youtube_index === -1) {
@@ -44,6 +57,8 @@
         return handleNextVideo();
       } else if (action === "go") {
         return handleGotoVideo();
+      } else if (action === "prev_video") {
+        return handlePrevVideo();
       }
     }
   });
@@ -52,6 +67,7 @@
 
   window.__voicer.addCommand({
     "next video": webActions["youtube"]("next_video"),
+    "previous video": webActions["youtube"]("prev_video")
     go: webActions["youtube"]("go")
   });
 })();
