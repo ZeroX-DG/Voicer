@@ -1,30 +1,57 @@
-window.__voicer.addWebActions("youtube", function(action) {
-  const $ = window.jQuery;
-  if (window.location.hostname == "www.youtube.com") {
-    if (action === "next_video") {
+(function () {
+  window.__voicer.addWebActions("youtube", function(action) {
+    const $ = window.jQuery;
+    const videoSelector = function () {
+      if (location.pathname === "/") {
+        return "ytd-grid-video-renderer";
+      }
+      return "ytd-compact-video-renderer, ytd-compact-radio-renderer";
+    }
+    const addBorder = function (el) {
+      $(el).css("border", "1px solid red");
+    }
+    const removeBorder = function (el) {
+      $(el).css("border", "1px solid transparent");
+    }
+
+    const handleNextVideo = function () {
       if (!window.__youtube_index) {
         window.__youtube_index = -1;
       }
       return function() {
-        const currentVideo = $(
-          "ytd-compact-video-renderer, ytd-compact-radio-renderer"
-        )[window.__youtube_index];
-        $(currentVideo).css("border", "1px solid transparent");
+        let currentVideo = $(videoSelector())[window.__youtube_index];
+        removeBorder(currentVideo);
         window.__youtube_index++;
-        const nextVideo = $(
-          "ytd-compact-video-renderer, ytd-compact-radio-renderer"
-        )[window.__youtube_index];
-        $(nextVideo).css("border", "1px solid red");
+        currentVideo = $(videoSelector())[window.__youtube_index];
+        addBorder(currentVideo);
       };
-    } else if (action === "go") {
+    }
+
+    const handleGotoVideo = function () {
       return function() {
-        const currentVideo = $(
-          "ytd-compact-video-renderer, ytd-compact-radio-renderer"
-        )[window.__youtube_index];
-        $(currentVideo).css("border", "1px solid transparent");
+        if (!window.__youtube_index || window.__youtube_index === -1) {
+          return;
+        }
+        const currentVideo = $(videoSelector())[window.__youtube_index];
+        removeBorder(currentVideo);
         window.__youtube_index = -1;
         currentVideo.querySelector("a").click();
       };
     }
-  }
-});
+
+    if (window.location.hostname == "www.youtube.com") {
+      if (action === "next_video") {
+        return handleNextVideo();
+      } else if (action === "go") {
+        return handleGotoVideo();
+      }
+    }
+  });
+
+  const webActions = window.__voicer.webActions;
+
+  window.__voicer.addCommand({
+    "next video": webActions["youtube"]("next_video"),
+    go: webActions["youtube"]("go")
+  });
+})();
