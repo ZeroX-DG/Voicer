@@ -3,6 +3,7 @@
     const $ = window.jQuery;
     const searchBoxSelector = "#search input";
     const searchButtonSelector = "#search-icon-legacy";
+    const skipAdsButtonSelector = ".ytp-ad-skip-button.ytp-button";
     const videoSelector = function() {
       if (window.location.pathname === "/") {
         return "ytd-grid-video-renderer";
@@ -74,6 +75,12 @@
       };
     };
 
+    const handleSkipAds = function() {
+      return function() {
+        $(skipAdsButtonSelector).trigger("click");
+      };
+    };
+
     if (window.location.hostname == "www.youtube.com") {
       if (action === "next_video") {
         return handleNextVideo();
@@ -85,6 +92,8 @@
         return handleSearchInput();
       } else if (action === "search_go") {
         return handleSearchGo();
+      } else if (action === "skip_ads") {
+        return handleSkipAds();
       }
     }
   });
@@ -96,6 +105,7 @@
     "previous video": webActions["youtube"]("prev_video"),
     "enter *text": webActions["youtube"]("search_input"),
     "find it": webActions["youtube"]("search_go"),
+    skip: webActions["youtube"]("skip_ads"),
     go: webActions["youtube"]("go")
   });
 })();
