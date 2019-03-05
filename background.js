@@ -1,14 +1,38 @@
 const COMMANDS = {
   NEW_TAB: "voicer:new_tab",
   SWITCH_TAB: "voicer:switch_tab",
-  CLOSE_CURRENT_TAB: "voicer:close_current_tab"
+  CLOSE_CURRENT_TAB: "voicer:close_current_tab",
+  NEXT_TAB: "voicer:next_tab",
+  PREV_TAB: "voicer:prev_tab"
 };
 
 const FUNCTIONS = {
   [COMMANDS.NEW_TAB]: createNewTab,
   [COMMANDS.SWITCH_TAB]: switchTab,
-  [COMMANDS.CLOSE_CURRENT_TAB]: closeCurrentTab
+  [COMMANDS.CLOSE_CURRENT_TAB]: closeCurrentTab,
+  [COMMANDS.NEXT_TAB]: goToNextTab,
+  [COMMANDS.PREV_TAB]: goToPrevTab
 };
+
+function goToNextTab(request, sender, sendResponse) {
+  sendResponse({ status: "ok" });
+  chrome.tabs.query({ active: true }, function(tabs) {
+    chrome.tabs.query({ index: tabs[0].index + 1 }, function(nexttabs) {
+      chrome.tabs.update(nexttabs[0].id, { active: true });
+      chrome.tabs.sendMessage(nexttabs[0].id, { voiceOn: true });
+    });
+  });
+}
+
+function goToPrevTab(request, sender, sendResponse) {
+  sendResponse({ status: "ok" });
+  chrome.tabs.query({ active: true }, function(tabs) {
+    chrome.tabs.query({ index: tabs[0].index - 1 }, function(nexttabs) {
+      chrome.tabs.update(nexttabs[0].id, { active: true });
+      chrome.tabs.sendMessage(nexttabs[0].id, { voiceOn: true });
+    });
+  });
+}
 
 function createNewTab(request, sender, sendResponse) {
   sendResponse({ status: "ok" });

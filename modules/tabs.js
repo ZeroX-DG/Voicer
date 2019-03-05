@@ -1,4 +1,4 @@
-(function () {
+(function() {
   window.__voicer.addModule("tabs", function(action) {
     const $ = window.jQuery;
     if (action === "new_tab") {
@@ -27,6 +27,18 @@
       return function() {
         history.forward();
       };
+    } else if (action === "next_tab") {
+      return function() {
+        window.__voicer
+          .sendCommand("voicer:next_tab")
+          .then(window.__voicer.stop);
+      };
+    } else if (action === "prev_tab") {
+      return function() {
+        window.__voicer
+          .sendCommand("voicer:prev_tab")
+          .then(window.__voicer.stop);
+      };
     }
   });
 
@@ -37,6 +49,8 @@
     "switch tab *tab": modules["tabs"]("switch_tab"),
     "close tab": modules["tabs"]("close_tab"),
     "go back": modules["tabs"]("go_back"),
-    "go forward": modules["tabs"]("go_forward")
+    "go forward": modules["tabs"]("go_forward"),
+    "next tab": modules["tabs"]("next_tab"),
+    "previous tab": modules["tabs"]("prev_tab")
   });
 })();
