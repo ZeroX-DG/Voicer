@@ -41,7 +41,7 @@ function createNewTab(request, sender, sendResponse) {
 
 function switchTab(request, sender, sendResponse) {
   sendResponse({ status: "ok" });
-  const tabIndex = parseInt(request.tab);
+  const tabIndex = parseInt(request.tab) - 1; // array index starts at 0
   chrome.tabs.query({ index: tabIndex }, function(tabs) {
     chrome.tabs.update(tabs[0].id, { active: true });
     chrome.tabs.sendMessage(tabs[0].id, { voiceOn: true });
