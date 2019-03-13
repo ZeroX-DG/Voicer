@@ -3,8 +3,20 @@
   position: fixed;
   right: 10px;
   bottom: 10px;
-  background: blue;
+  background: rgb(53, 122, 251);
   color: white;
   display: none;
   z-index: 100000;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 25px;
+  font-size: 14px;
+}
+
+.recog-result::before {
+  content: "Voicer";
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  top: 5px;
+  left: 5px;
+  position: absolute;
 }
