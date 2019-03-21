@@ -103,7 +103,7 @@
   window.__voicer.addCommand({
     "next video": webActions["youtube"]("next_video"),
     "previous video": webActions["youtube"]("prev_video"),
-    "enter *text": webActions["youtube"]("search_input"),
+    "input *text": webActions["youtube"]("search_input"),
     "find it": webActions["youtube"]("search_go"),
     skip: webActions["youtube"]("skip_ads"),
     go: webActions["youtube"]("go")
