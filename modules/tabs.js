@@ -50,7 +50,6 @@
   });
 
   const modules = window.__voicer.modules;
-
   window.__voicer.addCommand({
     "new tab *url": modules["tabs"]("new_tab"),
     "switch tab *tab": modules["tabs"]("switch_tab"),

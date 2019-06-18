@@ -22,7 +22,7 @@
         window.__youtube_index = -1;
       }
       return function() {
-		chrome.runtime.sendMessage({toSay: "Ok Loading the next video"});  
+        chrome.runtime.sendMessage({ toSay: "Ok Loading the next video" });
         let currentVideo = $(videoSelector())[window.__youtube_index];
         removeBorder(currentVideo);
         window.__youtube_index++;
@@ -36,7 +36,7 @@
         window.__youtube_index = -1;
       }
       return function() {
-		chrome.runtime.sendMessage({toSay: "Ok Loading the previous video"}); 
+        chrome.runtime.sendMessage({ toSay: "Ok Loading the previous video" });
         let currentVideo = $(videoSelector())[window.__youtube_index];
         removeBorder(currentVideo);
         window.__youtube_index--;
@@ -67,21 +67,25 @@
 
     const handleSearchInput = function() {
       return function(text) {
-		chrome.runtime.sendMessage({toSay: "Ok we will type that for you now"}); 
+        chrome.runtime.sendMessage({
+          toSay: "Ok we will type that for you now"
+        });
         $(searchBoxSelector).val(text);
       };
     };
 
     const handleSearchGo = function() {
       return function() {
-		 chrome.runtime.sendMessage({toSay: "Ok we will search that for you now"}); 
+        chrome.runtime.sendMessage({
+          toSay: "Ok we will search that for you now"
+        });
         $(searchButtonSelector).trigger("click");
       };
     };
 
     const handleSkipAds = function() {
       return function() {
-		 chrome.runtime.sendMessage({toSay: "Ok skipping Ad"}); 
+        chrome.runtime.sendMessage({ toSay: "Ok skipping Ad" });
         $(skipAdsButtonSelector).trigger("click");
       };
     };

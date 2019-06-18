@@ -19,12 +19,16 @@
     if (window.location.hostname == "www.google.com") {
       if (action === "input") {
         return function(text) {
-	      chrome.runtime.sendMessage({toSay: "Ok we will type that for you now"});
+          chrome.runtime.sendMessage({
+            toSay: "Ok we will type that for you now"
+          });
           $(searchBoxSelector).val(text);
         };
       } else if (action === "find") {
         return function() {
-		chrome.runtime.sendMessage({toSay: "Ok we will search that for you now"});
+          chrome.runtime.sendMessage({
+            toSay: "Ok we will search that for you now"
+          });
           $(searchButtonSelector1).trigger("click");
           $(searchButtonSelector2).trigger("click");
         };
@@ -33,7 +37,7 @@
           window.__google_index = -1;
         }
         return function() {
-		  chrome.runtime.sendMessage({toSay: "Ok selecting next result"});
+          chrome.runtime.sendMessage({ toSay: "Ok selecting next result" });
           const result1 = Array.prototype.slice.call(
             document.querySelectorAll(searchResultSelector1)
           );
@@ -53,7 +57,7 @@
           window.__google_index = -1;
         }
         return function() {
-		  chrome.runtime.sendMessage({toSay: "Ok selecting previous result"});
+          chrome.runtime.sendMessage({ toSay: "Ok selecting previous result" });
           const result1 = Array.prototype.slice.call(
             document.querySelectorAll(searchResultSelector1)
           );
@@ -70,7 +74,7 @@
         };
       } else if (action === "go") {
         return function() {
-		  chrome.runtime.sendMessage({toSay: "Ok Lets Go."});
+          chrome.runtime.sendMessage({ toSay: "Ok Lets Go." });
           const result1 = Array.prototype.slice.call(
             document.querySelectorAll(searchResultSelector1)
           );
