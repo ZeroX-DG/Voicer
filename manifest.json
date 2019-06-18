@@ -1,0 +1,55 @@
+{
+  "manifest_version": 2,
+  "name": "Voicer",
+  "version": "1.4",
+
+  "description": "A chrome's voice controller",
+  "options_page": "options.html",
+  "devtools_page": "help.html",
+  "permissions": ["tabs", "storage", "tts"],
+  "tts_engine": {
+    "voices": [
+      {
+        "voice_name": "Alice",
+        "lang": "en-US",
+        "event_types": ["start", "marker", "end"]
+      },
+      {
+        "voice_name": "Pat",
+        "lang": "en-US",
+        "event_types": ["end"]
+      }
+    ]
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": ["*://*/*"],
+      "js": ["libs/jquery.js", "libs/annyang.min.js"],
+      "css": ["css/voicer.css"]
+    },
+    {
+      "run_at": "document_end",
+      "matches": ["*://*/*"],
+      "js": [
+        "main.js",
+        "modules/scroll.js",
+        "modules/zoom.js",
+        "modules/tabs.js",
+        "modules/other.js",
+        "modules/custom-commands.js",
+        "website-actions/google/main.js",
+        "website-actions/youtube/main.js",
+        "voicer.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Voicer Options</title>
+    <script src="libs/jquery.js"></script>
+    <style>
+     body {
+         font-family: "Lato", sans-serif;
+         width: 50%;
+         margin-left: 25%;
+         font-size: 18px;
+     }
+     code {
+         background: rgba(0, 0, 0, 0.5);
+         color: white;
+         padding: 5px;
+         border-radius: 5px;
+         box-sizing: border-box;
+     }
+     p {
+         line-height: 40px;
+     }
+     .option-input {
+         margin-bottom: 20px;
+         width: 100%;
+     }
+     input {
+         width: 100%;
+     }
+     button {
+         border: none;
+         padding: 10px 15px;
+         border-radius: 2px;
+         outline: none;
+         cursor: pointer;
+         font-size: 18px;
+         font-family: inherit;
+     }
+     button.delete {
+         color: white;
+         background: #e74c3c;
+     }
+     #custom-commands {
+         width: 100%;
+         border-collapse: collapse;
+         margin-bottom: 30px;
+     }
+     #custom-commands thead {
+         font-size: 20px;
+         font-weight: bold;
+         background: #6c5ce7;
+         color: white;
+     }
+
+     #custom-commands td {
+         padding: 10px;
+         box-sizing: border-box;
+     }
+
+     #custom-commands select {
+         width: 100%;
+         border: none;
+         background: #6c5ce7;
+         color: white;
+         padding: 10px;
+         box-sizing: border-box;
+         font-size: 16px;
+     }
+
+     #custom-commands input {
+         padding: 5px 10px;
+         box-sizing: border-box;
+         font-family: inherit;
+         font-size: inherit;
+     }
+    </style>
+  </head>
+  <body>
+    <h1>Voicer Options</h1>
+    <div class="option-input">
+      Scroll amount <br />
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="100"
+          max="1000"
+          value="500"
+          class="slider"
+          id="Scroll_amount"
+        />
+      </div>
+    </div>
+    <div class="option-input">
+      Scroll Speed <br />
+      <div class="slidecontainer">
+        <input
+          type="range"
+          min="100"
+          max="2000"
+          value="800"
+          class="slider"
+          id="Scroll_Speed"
+        />
+      </div>
+    </div>
+    <h1>Custom commands</h1>
+    <p>
+        <button id="add-custom-command-btn">Add new</button>
+    </p>
+    <table id="custom-commands">
+        <thead>
+            <tr>
+                <td>Command</td>
+                <td>Action</td>
+                <td>Value</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button style="background: #6c5ce7; color: white" id="saveAll">Save settings</button>
+    <button id="resetAll">Reset settings</button>
+    <script src="options.js"></script>
+  </body>
+</html>
