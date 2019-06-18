@@ -11,6 +11,7 @@
     }
   });
   const modules = window.__voicer.modules;
+  const voicer = window.__voicer;
   const actions = {};
   chrome.storage.sync.get(["customCommands"], function(data) {
     const commands = data.customCommands;
@@ -22,6 +23,6 @@
         );
       }
     }
-    window.__voicer.addCommand(actions);
+    voicer.addCommand(actions);
   });
 })();

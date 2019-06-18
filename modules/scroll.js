@@ -9,7 +9,6 @@
         ) {
           const scrollAmount = parseInt(data.Scroll_amount);
           const scrollSpeed = parseInt(data.Scroll_Speed);
-
           $("body,html").animate(
             { scrollTop: $("html").scrollTop() - scrollAmount },
             scrollSpeed

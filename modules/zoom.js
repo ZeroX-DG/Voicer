@@ -3,7 +3,7 @@
     const $ = window.jQuery;
     if (direction === "in") {
       return function() {
-        chrome.runtime.sendMessage({ toSay: "Ok Zooming Out" });
+        chrome.runtime.sendMessage({ toSay: "Ok Zooming In" });
         const currentZoom = parseFloat($("body").css("zoom"));
         $("body").animate({ zoom: currentZoom * 2 }, 800);
       };
